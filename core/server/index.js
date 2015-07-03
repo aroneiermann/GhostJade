@@ -4,6 +4,7 @@
 // Module dependencies
 var express     = require('express'),
     hbs         = require('express-hbs'),
+    jade        = require('jade'),
     compress    = require('compression'),
     fs          = require('fs'),
     uuid        = require('node-uuid'),
@@ -45,7 +46,7 @@ function doFirstRun() {
 }
 
 function initDbHashAndFirstRun() {
-    return api.settings.read({key: 'dbHash', context: {internal: true}}).then(function (response) {
+   return api.settings.read({key: 'dbHash', context: {internal: true}}).then(function (response) {
         var hash = response.settings[0].value,
             initHash;
 
@@ -200,7 +201,7 @@ function init(options) {
 
         // ## View engine
         // set the view engine
-        blogApp.set('view engine', 'hbs');
+        blogApp.set('view engine', 'jade');
 
         // Create a hbs instance for admin and init view engine
         adminApp.set('view engine', 'hbs');
